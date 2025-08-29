@@ -27,11 +27,13 @@ small,.small{font-size:.875rem}
 .muted{color:var(--muted)}
 .container{width:min(1100px,92vw);margin:0 auto}
 
-/* Very light page flair (barely-there) */
+/* === Gentle cool gradient background (slightly stronger than original) === */
 body{
   background:
-    radial-gradient(900px 500px at 85% -10%, rgba(147,197,253,.10), transparent 60%),
-    var(--bg);
+    radial-gradient(1400px 900px at 85% -10%, rgba(147,197,253,.32), transparent 75%),
+    radial-gradient(1200px 720px at 10% 30%, rgba(196,181,253,.26), transparent 72%),
+    #ffffff;
+  background-attachment: fixed, fixed, scroll;
 }
 
 /* Skip link */
