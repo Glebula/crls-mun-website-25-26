@@ -111,3 +111,16 @@ small,.small{font-size:.875rem}
 .delay-1{transition-delay:.08s}
 .delay-2{transition-delay:.16s}
 .delay-3{transition-delay:.24s}
+/* ==== Image Placeholder Blocks ==== */
+.img-ph {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 4/3;              /* default size */
+  background: linear-gradient(135deg,#e2e8f0,#cbd5e1);
+  border: 2px dashed #94a3b8;
+  border-radius: 12px;
+  color: #475569;
+  font-weight: 600;
+}
+.img-ph.wide { aspect-ratio: 16/9; }   /* for hero/banner */
+.img-ph.tall { aspect-ratio: 3/4; }    /* for portrait if needed */
