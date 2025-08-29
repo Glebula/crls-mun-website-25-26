@@ -9,9 +9,10 @@
   --muted:#4b5563;           /* softer text */
 
   /* Sunset accents */
-  --accent:#f97316;          /* orange */
-  --accent-2:#ec4899;        /* pink */
-  --accent-3:#8b5cf6;        /* violet */
+  --accent:#059669;   /* jade green */
+  --accent-2:#065f46; /* deep emerald */
+  --accent-3:#f59e0b; /* gold */
+
 
   --border:#eadfdc;
   --card:#ffffff;
