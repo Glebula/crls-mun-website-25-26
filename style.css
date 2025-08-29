@@ -27,13 +27,14 @@ small,.small{font-size:.875rem}
 .muted{color:var(--muted)}
 .container{width:min(1100px,92vw);margin:0 auto}
 
-/* === Gentle cool gradient background (slightly stronger than original) === */
+/* === Gentle cool gradient background (lighter blue, balanced with lavender) === */
 body{
   background:
-    radial-gradient(1400px 900px at 85% -10%, rgba(147,197,253,.32), transparent 75%),
-    radial-gradient(1200px 720px at 10% 30%, rgba(196,181,253,.26), transparent 72%),
+    radial-gradient(1400px 900px at 85% -10%, rgba(147,197,253,.26), transparent 75%),
+    radial-gradient(1200px 720px at 10% 30%, rgba(196,181,253,.24), transparent 72%),
+    radial-gradient(1600px 900px at 50% 130%, rgba(196,181,253,.10), transparent 80%),
     #ffffff;
-  background-attachment: fixed, fixed, scroll;
+  background-attachment: fixed, fixed, fixed, scroll;
 }
 
 /* Skip link */
