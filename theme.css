@@ -28,11 +28,11 @@ small,.small{font-size:.875rem}
 .muted{color:var(--muted)}
 .container{width:min(1100px,92vw);margin:0 auto}
 
-/* === Soft cool gradient background === */
+/* === More noticeable cool gradient background === */
 body{
   background:
-    radial-gradient(1200px 800px at 85% -10%, rgba(147,197,253,.25), transparent 70%),
-    radial-gradient(1000px 600px at 10% 20%, rgba(196,181,253,.20), transparent 65%),
+    radial-gradient(1200px 800px at 85% -10%, rgba(147,197,253,.45), transparent 75%),
+    radial-gradient(1000px 600px at 10% 30%, rgba(196,181,253,.35), transparent 70%),
     #ffffff;
 }
 
