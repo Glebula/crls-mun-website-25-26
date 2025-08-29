@@ -8,9 +8,10 @@
   --surface-lite:#f8fafc;    /* light alt */
   --text:#e6eefc;            /* light text on dark */
   --muted:#9bb0ce;           /* soft slate */
-  --accent:#38bdf8;          /* sky-400 */
-  --accent-2:#6366f1;        /* indigo-500 */
-  --accent-3:#22d3ee;        /* cyan-400 */
+  --accent:#10b981;   /* emerald */
+  --accent-2:#14b8a6; /* teal */
+  --accent-3:#06b6d4; /* cyan */
+
 
   --border:#1f2b43;
   --card:#0f172a;
