@@ -124,3 +124,85 @@ small,.small{font-size:.875rem}
 }
 .img-ph.wide { aspect-ratio: 16/9; }   /* for hero/banner */
 .img-ph.tall { aspect-ratio: 3/4; }    /* for portrait if needed */
+/* ==== THEME UPGRADE: subtle gradient, richer buttons, nicer hovers ==== */
+
+/* 1) Background: gentle radial gradient + soft pattern */
+body {
+  background:
+    radial-gradient(1200px 600px at 80% -10%, rgba(14,165,233,0.10), transparent 60%),
+    radial-gradient(1200px 700px at -10% 20%, rgba(99,102,241,0.10), transparent 55%),
+    var(--bg);
+}
+
+/* optional soft top shadow under sticky header */
+.site-header { box-shadow: 0 2px 10px rgba(2,6,23,.06); }
+
+/* 2) Section titles: accent underline */
+.section h2 {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 4px;
+}
+.section h2::after {
+  content: "";
+  position: absolute;
+  left: 0; bottom: 0;
+  width: 56%;
+  height: 3px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  opacity: .9;
+}
+
+/* 3) Cards + gallery: livelier hover */
+.card, .gallery-item {
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+}
+.card:hover, .gallery-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 40px rgba(2,6,23,.12);
+  border-color: #cbd5e1;
+}
+
+/* 4) Buttons: gradient + subtle glow */
+.btn {
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  box-shadow: 0 10px 24px rgba(3,105,161,.22);
+}
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 34px rgba(3,105,161,.28);
+}
+.btn-ghost {
+  border-color: #cbd5e1;
+  background: rgba(2,132,199,0.06);
+}
+.btn-ghost:hover {
+  background: rgba(2,132,199,0.1);
+}
+
+/* 5) Hero: lift the placeholder card a bit */
+.hero-card {
+  background: rgba(248,250,252,0.85);
+  backdrop-filter: blur(4px);
+}
+
+/* 6) Placeholder blocks: softer look on hover */
+.img-ph {
+  background: linear-gradient(135deg,#eef2f7,#dce6f1);
+  border: 2px dashed #b6c2cf;
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+}
+.img-ph:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 26px rgba(2,6,23,.10);
+  border-color: #8aa0b5;
+}
+
+/* 7) Footer: faint top gradient edge */
+.site-footer {
+  border-top: none;
+  background:
+    linear-gradient(180deg, rgba(2,132,199,0.06), rgba(2,132,199,0.00) 140px),
+    var(--surface);
+}
