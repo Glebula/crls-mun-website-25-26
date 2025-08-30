@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Register • CambridgeMUN (BridgeMUN)</title>
+  <meta name="description" content="Register schools and delegates for CambridgeMUN (BridgeMUN). All fees, deadlines, forms are placeholders." />
+  <link rel="stylesheet" href="theme.css?v=cool6" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="index.html" aria-label="CambridgeMUN Home">
+        <div class="logo-ph" aria-hidden="true">LOGO</div>
+        <div class="brand-text">
+          <span class="brand-title">CambridgeMUN</span>
+          <span class="brand-sub">BridgeMUN</span>
+        </div>
+      </a>
+
+      <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu">
+        <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+      </button>
+
+      <nav id="site-nav" class="site-nav" aria-label="Primary">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="committees.html">Committees</a></li>
+          <li><a href="schedule.html">Schedule</a></li>
+          <li><a class="active" href="register.html">Register</a></li>
+          <li><a href="policies.html">Policies</a></li>
+          <li><a href="secretariat.html">Secretariat</a></li>
+          <li><a class="btn btn-sm" href="register.html">Register</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container hero-inner">
+      <div>
+        <h1 class="reveal">Register</h1>
+        <p class="lead reveal delay-1">All details here are placeholders. Swap in your actual fees, deadlines, forms, and waiver info.</p>
+        <p class="meta reveal delay-2"><strong>Venue:</strong> Cambridge Rindge &amp; Latin School — 459 Broadway, Cambridge, MA 02138</p>
+      </div>
+      <figure class="hero-card reveal delay-2" aria-label="Registration banner placeholder">
+        <div class="img-ph wide">[ Registration Banner Placeholder ]</div>
+        <figcaption class="muted small">Replace with a graphic or a photo from past conferences.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <main id="main">
+    <section class="section alt">
+      <div class="container split">
+        <div class="reveal">
+          <h2>Fees &amp; Deadlines</h2>
+          <ul class="muted">
+            <li><strong>School Registration Fee:</strong> [$XX]</li>
+            <li><strong>Delegate Fee:</strong> [$XX per delegate]</li>
+            <li><strong>Advisor Pass:</strong> [$XX each] (optional)</li>
+            <li><strong>Registration Opens:</strong> [Month Day, 20XX, 9:00 AM ET]</li>
+            <li><strong>Registration Closes:</strong> [Month Day, 20XX, 11:59 PM ET]</li>
+            <li><strong>Payment Deadline:</strong> [Month Day, 20XX]</li>
+            <li><strong>Refund Policy:</strong> [Full/partial/no refund by DATE placeholder]</li>
+          </ul>
+          <div class="cta" style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap">
+            <a class="btn btn-inline" href="#" aria-disabled="true">Google Form — Coming Soon</a>
+            <a class="btn btn-ghost btn-inline" href="#mailto-form">Register by Email</a>
+          </div>
+        </div>
+        <div class="card reveal delay-1">
+          <div class="img-ph">[ Payment Info Graphic Placeholder ]</div>
+          <p class="muted small">Replace with payment instructions (check, PO, online) + mailing address if needed.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="mailto-form" class="section">
+      <div class="container split">
+        <div class="reveal">
+          <h2>Register by Email (Placeholder)</h2>
+          <p class="muted small">If you don’t have a Google Form yet, this simple email form lets advisors pre-register. It opens their mail app with your details.</p>
+          <form onsubmit="return buildMailto()" class="card" style="padding:16px">
+            <div style="display:grid; gap:12px">
+              <label>
+                <span class="small muted">School Name</span>
+                <input id="school" type="text" required placeholder="[Your School]" style="width:100%; padding:10px; border:1px solid var(--border); border-radius:10px" />
+              </label>
+              <label>
+                <span class="small muted">Advisor Name</span>
+                <input id="advisor" type="text" required placeholder="[Advisor Full Name]" style="width:100%; padding:10px; border:1px solid var(--border); border-radius:10px" />
+              </label>
+              <label>
+                <span class="small muted">Advisor Email</span>
+                <input id="email" type="email" required placeholder="[name@example.com]" style="width:100%; padding:10px; border:1px solid var(--border); border-radius:10px" />
+              </label>
+              <label>
+                <span class="small muted">Estimated Delegates</span>
+                <input id="delegates" type="number" min="1" placeholder="[e.g., 12]" style="width:100%; padding:10px; border:1px solid var(--border); border-radius:10px" />
+              </label>
+              <label>
+                <span class="small muted">Notes (optional)</span>
+                <textarea id="notes" rows="4" placeholder="[Allergies, accessibility, rooming, etc.]" style="width:100%; padding:10px; border:1px solid var(--border); border-radius:10px"></textarea>
+              </label>
+              <div style="display:flex; gap:10px; flex-wrap:wrap">
+                <button class="btn" type="submit">Open Email to Register</button>
+                <a class="btn btn-ghost" href="#" aria-disabled="true">Google Form — Coming Soon</a>
+              </div>
+              <p class="small muted">This will open a pre-filled email in your default mail app. Replace destination email in the code below.</p>
+            </div>
+          </form>
+        </div>
+        <div class="reveal">
+          <h2>Assigning Committees</h2>
+          <p class="muted">[Outline how you assign committees and countries/positions. Include a timeline and what info you need from schools.]</p>
+          <ul class="muted">
+            <li>Country/committee preferences due: [Date]</li>
+            <li>Preliminary assignments released: [Date]</li>
+            <li>Final roster due: [Date]</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt">
+      <div class="container split">
+        <div class="reveal">
+          <h2>Waivers &amp; Documents</h2>
+          <ul class="muted">
+            <li><strong>Delegate Waiver:</strong> [PDF — Coming Soon]</li>
+            <li><strong>Media Release:</strong> [PDF — Coming Soon]</li>
+            <li><strong>Code of Conduct:</strong> [Link to Policies page]</li>
+            <li><strong>Chaperone Ratio:</strong> [e.g., 1 adult per 10 students]</li>
+          </ul>
+          <p class="small muted">Upload your PDFs later and update the links.</p>
+        </div>
+        <div class="card reveal delay-1">
+          <div class="img-ph">[ Waiver Packet Placeholder ]</div>
+          <p class="muted small">Replace with a combined waiver packet or folder link.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container split">
+        <div class="reveal">
+          <h2>Accessibility &amp; Inclusion</h2>
+          <p class="muted">[Statement placeholder about accommodations, dietary needs, mobility access, and inclusivity policies.]</p>
+          <p class="small muted">Request accommodations by: [Date] via [email placeholder].</p>
+        </div>
+        <div class="card reveal delay-1">
+          <div class="img-ph">[ Accessibility Map Placeholder ]</div>
+          <p class="muted small">Replace with accessible entrance and elevator locations.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <div class="brand-row">
+          <div class="logo-ph small" aria-hidden="true">LOGO</div>
+          <div>
+            <div class="brand-title">CambridgeMUN</div>
+            <div class="muted small">BridgeMUN</div>
+          </div>
+        </div>
+        <p class="muted small">A student-run Model UN conference at Cambridge Rindge &amp; Latin School.</p>
+      </div>
+
+      <nav aria-label="Footer">
+        <ul class="footer-links">
+          <li><a href="committees.html">Committees</a></li>
+          <li><a href="schedule.html">Schedule</a></li>
+          <li><a class="active" href="register.html">Register</a></li>
+        </ul>
+      </nav>
+
+      <div class="footer-contact">
+        <p class="small"><strong>Contact:</strong> <a href="mailto:[conference-email-placeholder]">[conference-email-placeholder]</a></p>
+        <div class="social">
+          <a aria-label="Instagram" href="https://www.instagram.com/crls.mun/" class="icon ig" title="Instagram" target="_blank" rel="noopener"></a>
+          <a aria-label="Email" href="mailto:[conference-email-placeholder]" class="icon email" title="Email"></a>
+        </div>
+      </div>
+    </div>
+    <div class="container legal small muted">© <span id="year"></span> CambridgeMUN. All rights reserved.</div>
+  </footer>
+
+  <script>
+    function buildMailto(){
+      const to = 'DESTINATION_EMAIL@example.com'; // TODO: replace with your inbox
+      const school = encodeURIComponent(document.getElementById('school').value.trim());
+      const advisor = encodeURIComponent(document.getElementById('advisor').value.trim());
+      const email = encodeURIComponent(document.getElementById('email').value.trim());
+      const delegates = encodeURIComponent(document.getElementById('delegates').value.trim());
+      const notes = encodeURIComponent(document.getElementById('notes').value.trim());
+      const subject = encodeURIComponent(`[CambridgeMUN Registration] ${school}`);
+      const body = encodeURIComponent(
+`School: ${decodeURIComponent(school)}
+Advisor: ${decodeURIComponent(advisor)}
+Advisor Email: ${decodeURIComponent(email)}
+Estimated Delegates: ${decodeURIComponent(delegates)}
+Notes: ${decodeURIComponent(notes)}`
+      );
+      window.location.href = `mailto:${to}?subject=${subject}&body=${body}`;
+      return false;
+    }
+  </script>
+
+  <script src="script.js"></script>
+</body>
+</html>
