@@ -104,6 +104,8 @@ body{
 }
 .split{display:grid;grid-template-columns:1.1fr .9fr;gap:26px;align-items:start}
 @media (max-width: 920px){ .split{grid-template-columns:1fr} }
+.grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+@media (max-width: 720px){ .grid-2{grid-template-columns:1fr} }
 .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
 @media (max-width: 920px){ .grid-3{grid-template-columns:1fr 1fr} }
 @media (max-width: 620px){ .grid-3{grid-template-columns:1fr} }
@@ -116,6 +118,9 @@ body{
 .img-ph{display:grid;place-items:center;aspect-ratio:4/3;background:linear-gradient(135deg,#eef2ff,#f5f7ff);border:2px dashed #c7d2fe;border-radius:12px;color:#1d4ed8;font-weight:700;letter-spacing:.5px;transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease}
 .img-ph.wide{aspect-ratio:16/9}
 .img-ph:hover{transform:translateY(-2px);box-shadow:0 12px 26px rgba(29,78,216,.12);border-color:#a5b4fc}
+
+/* Compact committee cards */
+.cards .card .img-ph{aspect-ratio:16/9;height:120px;font-size:.75rem}
 
 /* ===== Facts ===== */
 .facts{padding:12px 0 8px}
