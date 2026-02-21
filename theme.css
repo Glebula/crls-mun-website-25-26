@@ -210,6 +210,26 @@ body{
       rgba(15,23,42,.45) 100%)
 }
 
+/* ===== Banner Arrows ===== */
+.banner-arrow{
+  position:absolute;top:50%;z-index:3;transform:translateY(-50%);
+  width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.30);
+  background:rgba(255,255,255,.18);
+  backdrop-filter:blur(12px) saturate(140%);
+  -webkit-backdrop-filter:blur(12px) saturate(140%);
+  color:#fff;font-size:1.6rem;line-height:1;cursor:pointer;
+  display:grid;place-items:center;
+  transition:background .2s ease, box-shadow .2s ease, transform .2s ease;
+}
+.banner-arrow:hover{background:rgba(255,255,255,.30);box-shadow:0 8px 24px rgba(0,0,0,.20);transform:translateY(-50%) scale(1.08)}
+.banner-prev{left:16px}
+.banner-next{right:16px}
+@media(max-width:720px){
+  .banner-arrow{width:36px;height:36px;font-size:1.3rem}
+  .banner-prev{left:10px}
+  .banner-next{right:10px}
+}
+
 /* ===== Scroll reveal ===== */
 .reveal{opacity:0;transform:translateY(12px);transition:opacity .45s ease, transform .45s ease}
 .reveal.show{opacity:1;transform:translateY(0)}
