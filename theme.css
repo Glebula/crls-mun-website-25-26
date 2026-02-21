@@ -157,6 +157,15 @@ body{
 .icon.email{mask:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="black" d="M20 4c1.11 0 2 .89 2 2v12c0 1.11-.89 2-2 2H4a2 2 0 0 1-2-2V6c0-1.11.89-2 2-2zm0 2H4v.01L12 12l8-5.99zM4 18h16V8l-8 6L4 8z"/></svg>') center/60% no-repeat}
 .legal{padding:8px 0;border-top:1px solid var(--border)}
 
+/* ===== Slideshow ===== */
+.slideshow-wrap{padding:0;overflow:hidden}
+.slideshow{position:relative;width:100%;aspect-ratio:16/9;background:#f1f5f9;border-radius:var(--radius) var(--radius) 0 0;overflow:hidden}
+.slideshow-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .6s ease}
+.slideshow-img.active{opacity:1}
+.slideshow-controls{display:flex;align-items:center;justify-content:center;gap:12px;padding:10px 16px;background:var(--surface);border-top:1px solid var(--border);border-radius:0 0 var(--radius) var(--radius)}
+.slideshow-btn{width:32px;height:32px;border-radius:8px;border:1px solid var(--border);background:var(--surface);color:var(--text);font-size:1.2rem;cursor:pointer;display:grid;place-items:center;transition:background .15s ease,border-color .15s ease}
+.slideshow-btn:hover{background:#eef2ff;border-color:var(--accent-3)}
+
 /* ===== Scroll reveal ===== */
 .reveal{opacity:0;transform:translateY(12px);transition:opacity .45s ease, transform .45s ease}
 .reveal.show{opacity:1;transform:translateY(0)}
