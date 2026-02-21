@@ -18,12 +18,12 @@ const obs = new IntersectionObserver((entries) => {
 
 revealEls.forEach(el => obs.observe(el));
 
-// Committee photo slideshow (random order)
+// Banner photo slideshow (random order, auto-advance)
 (function() {
-  const container = document.getElementById('committee-slideshow');
-  if (!container) return;
+  var banner = document.getElementById('banner-slideshow');
+  if (!banner) return;
 
-  const photos = [
+  var photos = [
     '630109026_18077159162361694_8054569595624198074_n.jpeg',
     'AAD_3600.jpg',
     'BridgeMUN (112 of 147).jpg',
@@ -57,51 +57,32 @@ revealEls.forEach(el => obs.observe(el));
   ];
 
   // Fisher-Yates shuffle
-  for (let i = photos.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [photos[i], photos[j]] = [photos[j], photos[i]];
+  for (var i = photos.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var tmp = photos[i]; photos[i] = photos[j]; photos[j] = tmp;
   }
 
-  const basePath = 'images/committee-photos/';
-  let current = 0;
+  var basePath = 'images/committee-photos/';
+  var current = 0;
 
-  // Create all img elements
-  container.innerHTML = '';
+  // Insert images before the overlay
+  var overlay = banner.querySelector('.banner-overlay');
   photos.forEach(function(name, idx) {
-    const img = document.createElement('img');
-    img.className = 'slideshow-img' + (idx === 0 ? ' active' : '');
+    var img = document.createElement('img');
+    img.className = idx === 0 ? 'active' : '';
     img.src = basePath + encodeURIComponent(name);
-    img.alt = 'Committee photo';
+    img.alt = 'BridgeMUN conference photo';
     img.loading = idx < 2 ? 'eager' : 'lazy';
-    container.appendChild(img);
+    banner.insertBefore(img, overlay);
   });
 
-  const imgs = container.querySelectorAll('.slideshow-img');
-  const counter = document.getElementById('slide-counter');
+  var imgs = banner.querySelectorAll('img');
 
-  function updateCounter() {
-    if (counter) counter.textContent = (current + 1) + ' / ' + photos.length;
-  }
-  updateCounter();
-
-  function goTo(idx) {
+  setInterval(function() {
     imgs[current].classList.remove('active');
-    current = (idx + photos.length) % photos.length;
+    current = (current + 1) % photos.length;
     imgs[current].classList.add('active');
-    updateCounter();
-  }
-
-  var prevBtn = document.getElementById('slide-prev');
-  var nextBtn = document.getElementById('slide-next');
-  if (prevBtn) prevBtn.addEventListener('click', function() { goTo(current - 1); resetAuto(); });
-  if (nextBtn) nextBtn.addEventListener('click', function() { goTo(current + 1); resetAuto(); });
-
-  // Auto-advance every 4 seconds
-  var autoTimer = setInterval(function() { goTo(current + 1); }, 4000);
-  function resetAuto() {
-    clearInterval(autoTimer);
-    autoTimer = setInterval(function() { goTo(current + 1); }, 4000);
-  }
+  }, 4000);
 })();
 
 // Footer year
