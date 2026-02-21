@@ -18,6 +18,9 @@ const obs = new IntersectionObserver((entries) => {
 
 revealEls.forEach(el => obs.observe(el));
 
+// Portrait images that need object-fit:contain instead of cover
+var portraitPhotos = ['IMG8675139148400310192.jpg'];
+
 // Banner photo slideshow (random order, auto-advance)
 (function() {
   var banner = document.getElementById('banner-slideshow');
@@ -70,6 +73,7 @@ revealEls.forEach(el => obs.observe(el));
   photos.forEach(function(name, idx) {
     var img = document.createElement('img');
     img.className = idx === 0 ? 'active' : '';
+    if (portraitPhotos.indexOf(name) !== -1) img.classList.add('portrait');
     img.src = basePath + encodeURIComponent(name);
     img.alt = 'BridgeMUN conference photo';
     img.loading = idx < 2 ? 'eager' : 'lazy';
@@ -166,6 +170,7 @@ revealEls.forEach(el => obs.observe(el));
     photos.forEach(function(name, idx) {
       var img = document.createElement('img');
       img.className = idx === 0 ? 'active' : '';
+      if (portraitPhotos.indexOf(name) !== -1) img.classList.add('portrait');
       img.src = basePath + encodeURIComponent(name);
       img.alt = 'BridgeMUN conference photo';
       img.loading = idx < 2 ? 'eager' : 'lazy';
