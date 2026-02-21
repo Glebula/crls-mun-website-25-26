@@ -157,6 +157,31 @@ body{
 .cards .card[data-type]{transition:opacity .3s ease, transform .3s ease}
 .cards .card.hidden{display:none}
 
+/* ===== Advisor card ===== */
+.advisor-card{
+  display:flex;gap:28px;align-items:center;
+  background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+  padding:24px;box-shadow:var(--shadow);text-align:left;
+}
+.advisor-photo{flex:0 0 200px}
+.advisor-photo img{
+  width:200px;height:240px;object-fit:cover;object-position:center 27.5%;
+  border-radius:12px;
+}
+.advisor-info h3{margin:0 0 4px}
+.advisor-years{margin:0 0 14px}
+.advisor-vision{
+  margin:0 0 14px;padding:10px 16px;
+  border-left:3px solid var(--accent);font-style:italic;
+  color:var(--text);background:var(--surface-2);border-radius:0 8px 8px 0;
+}
+.advisor-hope,.advisor-fun{margin:0 0 8px;font-size:.925rem;line-height:1.55}
+@media(max-width:600px){
+  .advisor-card{flex-direction:column;text-align:center}
+  .advisor-photo{flex:none}
+  .advisor-vision{border-left:none;border-top:3px solid var(--accent);border-radius:0 0 8px 8px}
+}
+
 /* ===== Facts ===== */
 .facts{padding:28px 0 16px}
 .fact{text-align:center;border-radius:14px;border:1px solid var(--border);background:var(--surface);padding:22px;box-shadow: var(--shadow);transition: transform .15s ease, box-shadow .15s ease}
