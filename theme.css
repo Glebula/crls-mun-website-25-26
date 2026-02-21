@@ -165,6 +165,11 @@ body{
 .fact-glass .fact-label{color:rgba(255,255,255,.85)}
 .fact-glass:hover{transform:translateY(-3px);box-shadow:0 16px 32px rgba(0,0,0,.20);background:rgba(255,255,255,.25)}
 
+/* ===== Mini Slideshow (sub-page hero cards) ===== */
+.mini-slideshow{position:relative;width:100%;aspect-ratio:16/9;border-radius:12px;overflow:hidden;background:#0f172a}
+.mini-slideshow img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1s ease}
+.mini-slideshow img.active{opacity:1}
+
 /* ===== Gallery ===== */
 .gallery{margin-top:12px}
 .gallery-item{display:block;border-radius:14px;border:1px solid var(--border);overflow:hidden;box-shadow:var(--shadow);transform:translateY(0);transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease}
