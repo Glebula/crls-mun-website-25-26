@@ -97,8 +97,8 @@ body{
 .hero-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow)}
 
 /* ===== Hero Banner ===== */
-.hero-banner{position:relative;overflow:hidden;min-height:680px}
-.hero-content{position:relative;z-index:2;text-align:center;padding:100px 0 40px;max-width:680px;margin:0 auto}
+.hero-banner{position:relative;overflow:hidden;min-height:680px;display:flex;flex-direction:column;justify-content:center}
+.hero-content{position:relative;z-index:2;text-align:center;padding:160px 0 32px;max-width:680px;margin:0 auto}
 .hero-content h1{font-size:clamp(2.2rem,5.5vw,3.4rem);font-weight:900;line-height:1.05;margin:0 0 .4rem;color:#fff;text-shadow:0 2px 16px rgba(0,0,0,.45)}
 .hero-content .lead{font-size:1.15rem;color:rgba(255,255,255,.9);text-shadow:0 1px 8px rgba(0,0,0,.35);max-width:55ch;margin:0 auto}
 .hero-content .meta{margin-top:8px;color:rgba(255,255,255,.85);text-shadow:0 1px 6px rgba(0,0,0,.3)}
@@ -153,7 +153,7 @@ body{
 .fact:hover{transform:translateY(-3px);box-shadow:0 16px 32px rgba(17,24,39,.10)}
 
 /* Facts overlaid inside the banner */
-.banner-facts{position:relative;z-index:2;padding-bottom:32px}
+.banner-facts{position:relative;z-index:2;padding-bottom:40px;margin-top:auto}
 .fact-glass{
   background:rgba(255,255,255,.18);
   backdrop-filter:blur(12px) saturate(140%);
@@ -201,8 +201,8 @@ body{
 .delay-3{transition-delay:.24s}
 @media (max-width:720px){
   .hero-banner{min-height:560px}
-  .hero-content{padding:70px 0 30px}
-  .banner-facts{padding-bottom:24px}
+  .hero-content{padding:120px 0 24px}
+  .banner-facts{padding-bottom:28px}
 }
 @media (max-width: 920px){
   .hero-inner{grid-template-columns:1fr;gap:20px}
