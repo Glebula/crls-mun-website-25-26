@@ -168,6 +168,29 @@ revealEls.forEach(el => obs.observe(el));
   });
 })();
 
+// Committee filter toggle
+(function() {
+  var btns = document.querySelectorAll('.filter-btn');
+  if (!btns.length) return;
+  var cards = document.querySelectorAll('.cards .card[data-type]');
+
+  btns.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      btns.forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      var filter = btn.getAttribute('data-filter');
+
+      cards.forEach(function(card) {
+        if (filter === 'all' || card.getAttribute('data-type') === filter) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    });
+  });
+})();
+
 // Footer year
 const yearEl = document.getElementById('year');
 if (yearEl) yearEl.textContent = new Date().getFullYear();
