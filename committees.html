@@ -79,49 +79,55 @@
       <div class="container">
         <h2 class="reveal">Our Committees</h2>
 
+        <div class="filter-toggle reveal" role="group" aria-label="Filter committees">
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="ga">General Assembly</button>
+          <button class="filter-btn" data-filter="crisis">Crisis</button>
+        </div>
+
         <div class="grid-2 cards">
-          <!-- Card 1 -->
-          <article class="card reveal">
+          <!-- GA 1 -->
+          <article class="card reveal" data-type="ga">
             <img src="https://theglobalobservatory.org/wp-content/uploads/2013/07/journalist-200.jpg" alt="Protecting Journalists in Conflict Zones" class="committee-img">
             <h3>Protecting Journalists in Conflict Zones</h3>
-            <p class="muted small">Type: General Assembly</p>
+            <p class="muted small">Type: General Assembly - UNHCR</p>
             <p class="small"><strong>Chairs:</strong> Josephine Nichols, Acadia Boyer, Petra Blachly-Nelson, and Lee Van Voorhis</p>
             <p class="small"><strong>Background Guide:</strong> Coming soon</p>
           </article>
 
-          <!-- Card 2 -->
-          <article class="card reveal delay-1">
-            <img src="https://www.timeshighereducation.com/sites/default/files/nukes.jpg" alt="Disarming Nukes" class="committee-img">
-            <h3>Disarming Nukes</h3>
+          <!-- GA 2 -->
+          <article class="card reveal delay-1" data-type="ga">
+            <img src="https://www.timeshighereducation.com/sites/default/files/nukes.jpg" alt="Chemical Weapons (by non state actors)" class="committee-img">
+            <h3>Chemical Weapons (by non state actors)</h3>
             <p class="muted small">Type: General Assembly - DISEC</p>
             <p class="small"><strong>Chairs:</strong> Nufail Muhameid, Issac Vang, Kaelan Curran, and Eli Schultz</p>
             <p class="small"><strong>Background Guide:</strong> Coming soon</p>
           </article>
 
-          <!-- Card 3 -->
-          <article class="card reveal">
-            <img src="https://th-thumbnailer.cdn-si-edu.com/TmuFTbm6pm8TtEmySCmv-orSu0k=/fit-in/1600x0/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/Cuban-Missile-Crisis-631.jpg" alt="Cuban Missile Crisis" class="committee-img">
-            <h3>Cuban Missile Crisis</h3>
-            <p class="muted small">Type: CRISIS</p>
-            <p class="small"><strong>Chairs:</strong> Marvi Spahiu, Son Schneider, Korrey Kim, and Xavier Agran</p>
-            <p class="small"><strong>Background Guide:</strong> Coming soon</p>
-          </article>
-
-          <!-- Card 4 -->
-          <article class="card reveal delay-1">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQr8R7LgGVheiC-_qKaaByjxnHS9zgR2HlRgQ&s" alt="Colonizing Mars" class="committee-img">
-            <h3>Colonizing Mars</h3>
-            <p class="muted small">Type: CRISIS</p>
-            <p class="small"><strong>Chairs:</strong> Lula Taylor, Mia Costa, Hazel Marcucella, and Sinead O'Gorman-Jones</p>
-            <p class="small"><strong>Background Guide:</strong> Coming soon</p>
-          </article>
-
-          <!-- Card 5 -->
-          <article class="card reveal">
+          <!-- GA 3 -->
+          <article class="card reveal" data-type="ga">
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5MsYMnQ1Ct1hGSOjjX9X3ILIesnl8nSWruQ&s" alt="Global Warming" class="committee-img">
             <h3>Global Warming</h3>
             <p class="muted small">Type: General Assembly - UNEA</p>
             <p class="small"><strong>Chairs:</strong> Kallie Alexis, Sadie Macdougall, and Elizabeth Sheldon</p>
+            <p class="small"><strong>Background Guide:</strong> Coming soon</p>
+          </article>
+
+          <!-- Crisis 1 -->
+          <article class="card reveal delay-1" data-type="crisis">
+            <img src="https://th-thumbnailer.cdn-si-edu.com/TmuFTbm6pm8TtEmySCmv-orSu0k=/fit-in/1600x0/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/Cuban-Missile-Crisis-631.jpg" alt="Cuban Missile Crisis" class="committee-img">
+            <h3>Cuban Missile Crisis</h3>
+            <p class="muted small">Type: Crisis</p>
+            <p class="small"><strong>Chairs:</strong> Marvi Spahiu, Son Schneider, Korrey Kim, and Xavier Agran</p>
+            <p class="small"><strong>Background Guide:</strong> Coming soon</p>
+          </article>
+
+          <!-- Crisis 2 -->
+          <article class="card reveal" data-type="crisis">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQr8R7LgGVheiC-_qKaaByjxnHS9zgR2HlRgQ&s" alt="Colonizing Mars" class="committee-img">
+            <h3>Colonizing Mars</h3>
+            <p class="muted small">Type: Crisis</p>
+            <p class="small"><strong>Chairs:</strong> Lula Taylor, Mia Costa, Hazel Marcucella, and Sinead O'Gorman-Jones</p>
             <p class="small"><strong>Background Guide:</strong> Coming soon</p>
           </article>
         </div>
