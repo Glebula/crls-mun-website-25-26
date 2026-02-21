@@ -77,12 +77,25 @@ revealEls.forEach(el => obs.observe(el));
   });
 
   var imgs = banner.querySelectorAll('img');
+  var timer;
 
-  setInterval(function() {
+  function goTo(next) {
     imgs[current].classList.remove('active');
-    current = (current + 1) % photos.length;
+    current = ((next % photos.length) + photos.length) % photos.length;
     imgs[current].classList.add('active');
-  }, 4000);
+  }
+
+  function startAuto() {
+    clearInterval(timer);
+    timer = setInterval(function() { goTo(current + 1); }, 4000);
+  }
+
+  var prevBtn = banner.querySelector('.banner-prev');
+  var nextBtn = banner.querySelector('.banner-next');
+  if (prevBtn) prevBtn.addEventListener('click', function() { goTo(current - 1); startAuto(); });
+  if (nextBtn) nextBtn.addEventListener('click', function() { goTo(current + 1); startAuto(); });
+
+  startAuto();
 })();
 
 // Mini slideshows on sub-pages (all 6 sub-pages, 5 unique photos each)
