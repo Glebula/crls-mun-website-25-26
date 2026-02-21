@@ -85,7 +85,7 @@ revealEls.forEach(el => obs.observe(el));
   }, 4000);
 })();
 
-// Mini slideshows on sub-pages (committees, schedule, policies, register)
+// Mini slideshows on sub-pages (all 6 sub-pages, 5 unique photos each)
 (function() {
   var photoSets = {
     committees: [
@@ -93,33 +93,37 @@ revealEls.forEach(el => obs.observe(el));
       'AAD_3600.jpg',
       'BridgeMUN (112 of 147).jpg',
       'BridgeMUN (114 of 147).jpg',
-      'BridgeMUN (115 of 147).jpg',
-      'BridgeMUN (139 of 147).jpg',
-      'BridgeMUN (145 of 147).jpg',
-      'BridgeMUN (29 of 147).jpg'
+      'BridgeMUN (115 of 147).jpg'
     ],
     schedule: [
+      'BridgeMUN (139 of 147).jpg',
+      'BridgeMUN (145 of 147).jpg',
+      'BridgeMUN (29 of 147).jpg',
       'BridgeMUN (38 of 147).jpg',
-      'BridgeMUN (4 of 147).jpg',
+      'BridgeMUN (4 of 147).jpg'
+    ],
+    policies: [
       'BridgeMUN (7 of 147).jpg',
       'IMG2518468206686349287.jpg',
       'IMG3745767816093940670.jpg',
       'IMG640698629215015412.jpg',
-      'IMG8675139148400310192.jpg',
-      'IMG_2671.JPG'
+      'IMG8675139148400310192.jpg'
     ],
-    policies: [
+    register: [
+      'IMG_2671.JPG',
       'IMG_2723.JPG',
       'IMG_2765.JPG',
       'IMG_2805.JPG',
-      'IMG_2836.JPG',
+      'IMG_2836.JPG'
+    ],
+    secretariat: [
       'IMG_3444.JPG',
       'IMG_3552.JPG',
-      'IMG_3573.JPG'
-    ],
-    register: [
+      'IMG_3573.JPG',
       'IMG_3586.JPG',
-      'IMG_3636.jpg',
+      'IMG_3636.jpg'
+    ],
+    faq: [
       'IMG_3674.jpg',
       'IMG_3695.jpg',
       'IMG_3854.jpg',
