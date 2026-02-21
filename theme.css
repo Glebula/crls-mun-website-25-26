@@ -163,10 +163,10 @@ body{
   background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
   padding:24px;box-shadow:var(--shadow);text-align:left;
 }
-.advisor-photo{flex:0 0 200px}
+.advisor-photo{flex:0 0 200px;border-radius:12px;overflow:hidden}
 .advisor-photo img{
   width:200px;height:240px;object-fit:cover;object-position:center 27.5%;
-  border-radius:12px;
+  border-radius:12px;display:block;
 }
 .advisor-info h3{margin:0 0 4px}
 .advisor-years{margin:0 0 14px}
