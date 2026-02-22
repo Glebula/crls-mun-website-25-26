@@ -182,6 +182,10 @@ body{
   .advisor-vision{border-left:none;border-top:3px solid var(--accent);border-radius:0 0 8px 8px}
 }
 
+/* ===== Member card photos ===== */
+.member-photo{margin:-18px -18px 14px;overflow:hidden;border-radius:var(--radius) var(--radius) 0 0}
+.member-photo img{width:100%;height:220px;object-fit:cover;object-position:center 20%;display:block}
+
 /* ===== Facts ===== */
 .facts{padding:28px 0 16px}
 .fact{text-align:center;border-radius:14px;border:1px solid var(--border);background:var(--surface);padding:22px;box-shadow: var(--shadow);transition: transform .15s ease, box-shadow .15s ease}
