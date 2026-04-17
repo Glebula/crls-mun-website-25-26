@@ -209,6 +209,20 @@ var portraitPhotos = ['IMG8675139148400310192.jpg'];
   });
 })();
 
+// Collapsible section toggle
+document.querySelectorAll('.collapsible-heading').forEach(function(heading) {
+  var content = heading.nextElementSibling;
+  if (!content || !content.classList.contains('collapsible-content')) return;
+  heading.addEventListener('click', function() {
+    var collapsed = heading.classList.toggle('collapsed');
+    content.classList.toggle('collapsed');
+    heading.setAttribute('aria-expanded', String(!collapsed));
+  });
+  heading.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); heading.click(); }
+  });
+});
+
 // Footer year
 const yearEl = document.getElementById('year');
 if (yearEl) yearEl.textContent = new Date().getFullYear();
