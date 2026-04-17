@@ -280,9 +280,13 @@ body{
 /* Collapsible sections */
 .collapsible-heading{cursor:pointer;user-select:none}
 .collapse-arrow{
-  display:inline-block;font-size:.7em;margin-left:8px;
-  transition:transform .25s ease;vertical-align:middle;
+  display:inline-flex;align-items:center;justify-content:center;
+  width:32px;height:32px;border-radius:8px;margin-left:10px;
+  font-size:1em;vertical-align:middle;
+  background:var(--accent);color:#fff;
+  transition:transform .25s ease, background .15s ease;
 }
+.collapsible-heading:hover .collapse-arrow{background:var(--accent-2)}
 .collapsible-heading.collapsed .collapse-arrow{transform:rotate(-90deg)}
 .collapsible-content{
   overflow:hidden;max-height:2000px;
