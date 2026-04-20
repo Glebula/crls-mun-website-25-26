@@ -603,3 +603,39 @@ body{
   .timeline-item{grid-template-columns:1fr;gap:4px}
   .tl-time{text-align:left;padding-left:4px}
 }
+
+/* ===== Policy Tabs ===== */
+.tabs-nav{
+  display:flex;gap:6px;flex-wrap:wrap;margin-bottom:28px;
+  border-bottom:2px solid var(--border);padding-bottom:12px;
+}
+.tab-btn{
+  padding:10px 18px;border-radius:10px 10px 0 0;
+  border:1px solid transparent;border-bottom:none;
+  background:transparent;color:var(--muted);
+  font-weight:600;font-size:.9rem;cursor:pointer;
+  transition:all .2s ease;position:relative;
+}
+.tab-btn:hover{color:var(--text);background:var(--surface-2)}
+.tab-btn.active{
+  color:var(--accent);background:var(--surface);
+  border-color:var(--border);
+  box-shadow:0 4px 12px rgba(37,99,235,.08);
+}
+.tab-btn.active::after{
+  content:"";position:absolute;bottom:-14px;left:0;right:0;
+  height:3px;background:linear-gradient(90deg,#2563eb,#7c3aed);border-radius:2px;
+}
+.tab-btn span{margin-right:4px}
+.tab-panel{display:none;animation:tab-fade .35s ease}
+.tab-panel.active{display:block}
+@keyframes tab-fade{
+  0%{opacity:0;transform:translateY(8px)}
+  100%{opacity:1;transform:translateY(0)}
+}
+.tab-panel h2{margin-top:0}
+@media(max-width:620px){
+  .tabs-nav{gap:4px}
+  .tab-btn{padding:8px 12px;font-size:.8rem}
+  .tab-btn span{display:none}
+}

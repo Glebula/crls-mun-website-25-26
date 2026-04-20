@@ -385,6 +385,29 @@ document.querySelectorAll('.collapsible-heading').forEach(function(heading) {
   burst(50);
 })();
 
+// Policy tabs
+(function() {
+  var tabBtns = document.querySelectorAll('.tab-btn[data-tab]');
+  if (!tabBtns.length) return;
+  var panels = document.querySelectorAll('.tab-panel');
+
+  function activate(tabId) {
+    tabBtns.forEach(function(b) { b.classList.toggle('active', b.getAttribute('data-tab') === tabId); });
+    panels.forEach(function(p) { p.classList.toggle('active', p.id === tabId); });
+  }
+
+  tabBtns.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      activate(btn.getAttribute('data-tab'));
+    });
+  });
+
+  var hash = window.location.hash.replace('#', '');
+  if (hash && document.getElementById(hash)) {
+    activate(hash);
+  }
+})();
+
 // Footer year
 const yearEl = document.getElementById('year');
 if (yearEl) yearEl.textContent = new Date().getFullYear();
