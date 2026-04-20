@@ -231,20 +231,23 @@ document.querySelectorAll('.collapsible-heading').forEach(function(heading) {
   var placeholder = document.createElement('div');
   placeholder.style.display = 'none';
   var isSticky = false;
+  var originalParent = parent;
 
   function check() {
-    var rect = parent.getBoundingClientRect();
-    var gone = rect.bottom < 0;
+    var rect = originalParent.getBoundingClientRect();
+    var gone = rect.bottom < -20;
     if (gone && !isSticky) {
       isSticky = true;
       placeholder.style.display = 'inline-block';
       placeholder.style.width = btn.offsetWidth + 'px';
       placeholder.style.height = btn.offsetHeight + 'px';
-      parent.insertBefore(placeholder, btn);
+      originalParent.insertBefore(placeholder, btn);
+      document.body.appendChild(btn);
       btn.classList.add('sticky');
     } else if (!gone && isSticky) {
       isSticky = false;
       btn.classList.remove('sticky');
+      originalParent.insertBefore(btn, placeholder);
       placeholder.style.display = 'none';
     }
   }
