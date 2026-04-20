@@ -343,7 +343,7 @@ body{
 }
 .btn-register-big.animating{
   position:fixed !important;z-index:50;
-  transition:top .5s ease, left .5s ease, right .5s ease, bottom .5s ease, font-size .5s ease, padding .5s ease, transform .5s ease;
+  transition:top 1s cubic-bezier(.34,1.56,.64,1), left 1s cubic-bezier(.34,1.56,.64,1), font-size 1s ease, padding 1s ease;
 }
 
 /* ===== Confetti ===== */
