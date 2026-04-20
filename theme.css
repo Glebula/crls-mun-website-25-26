@@ -341,9 +341,8 @@ body{
   font-size:1rem;padding:14px 32px;
   animation:register-glow 2.5s ease-in-out infinite;
 }
-.btn-register-big.animating{
+.btn-register-big.flying{
   position:fixed !important;z-index:50;
-  transition:top 1s cubic-bezier(.34,1.56,.64,1), left 1s cubic-bezier(.34,1.56,.64,1), font-size 1s ease, padding 1s ease;
 }
 
 /* ===== Confetti ===== */
