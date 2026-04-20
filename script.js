@@ -236,6 +236,15 @@ document.querySelectorAll('.collapsible-heading').forEach(function(heading) {
   var targetBottom = 28;
   var targetRight = 28;
 
+  function clearStyles() {
+    btn.style.top = '';
+    btn.style.left = '';
+    btn.style.right = '';
+    btn.style.bottom = '';
+    btn.style.fontSize = '';
+    btn.style.padding = '';
+  }
+
   function animateToCorner() {
     var rect = btn.getBoundingClientRect();
     placeholder.style.display = 'inline-block';
@@ -247,8 +256,6 @@ document.querySelectorAll('.collapsible-heading').forEach(function(heading) {
     btn.classList.add('animating');
     btn.style.top = rect.top + 'px';
     btn.style.left = rect.left + 'px';
-    btn.style.right = 'auto';
-    btn.style.bottom = 'auto';
     btn.style.fontSize = '1.5rem';
     btn.style.padding = '22px 56px';
 
@@ -264,54 +271,21 @@ document.querySelectorAll('.collapsible-heading').forEach(function(heading) {
         setTimeout(function() {
           btn.classList.remove('animating');
           btn.classList.add('sticky');
-          btn.style.top = '';
-          btn.style.left = '';
-          btn.style.right = '';
-          btn.style.bottom = '';
-          btn.style.fontSize = '';
-          btn.style.padding = '';
+          clearStyles();
           isSticky = true;
           animating = false;
-        }, 520);
+        }, 1050);
       });
     });
   }
 
   function animateToOriginal() {
-    var phRect = placeholder.getBoundingClientRect();
-    var btnRect = btn.getBoundingClientRect();
-
     btn.classList.remove('sticky');
-    btn.classList.add('animating');
-    btn.style.top = btnRect.top + 'px';
-    btn.style.left = btnRect.left + 'px';
-    btn.style.right = 'auto';
-    btn.style.bottom = 'auto';
-    btn.style.fontSize = '1rem';
-    btn.style.padding = '14px 32px';
-
-    requestAnimationFrame(function() {
-      requestAnimationFrame(function() {
-        btn.style.top = phRect.top + 'px';
-        btn.style.left = phRect.left + 'px';
-        btn.style.fontSize = '1.5rem';
-        btn.style.padding = '22px 56px';
-
-        setTimeout(function() {
-          btn.classList.remove('animating');
-          btn.style.top = '';
-          btn.style.left = '';
-          btn.style.right = '';
-          btn.style.bottom = '';
-          btn.style.fontSize = '';
-          btn.style.padding = '';
-          parent.insertBefore(btn, placeholder);
-          placeholder.style.display = 'none';
-          isSticky = false;
-          animating = false;
-        }, 520);
-      });
-    });
+    clearStyles();
+    parent.insertBefore(btn, placeholder);
+    placeholder.style.display = 'none';
+    isSticky = false;
+    animating = false;
   }
 
   function check() {
