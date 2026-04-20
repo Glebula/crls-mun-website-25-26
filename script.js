@@ -223,7 +223,7 @@ document.querySelectorAll('.collapsible-heading').forEach(function(heading) {
   });
 });
 
-// Sticky register button
+// Sticky register button with smooth animation
 (function() {
   var btn = document.getElementById('register-btn');
   if (!btn) return;
@@ -231,24 +231,99 @@ document.querySelectorAll('.collapsible-heading').forEach(function(heading) {
   var placeholder = document.createElement('div');
   placeholder.style.display = 'none';
   var isSticky = false;
-  var originalParent = parent;
+  var animating = false;
+
+  var targetBottom = 28;
+  var targetRight = 28;
+
+  function animateToCorner() {
+    var rect = btn.getBoundingClientRect();
+    placeholder.style.display = 'inline-block';
+    placeholder.style.width = rect.width + 'px';
+    placeholder.style.height = rect.height + 'px';
+    parent.insertBefore(placeholder, btn);
+    document.body.appendChild(btn);
+
+    btn.classList.add('animating');
+    btn.style.top = rect.top + 'px';
+    btn.style.left = rect.left + 'px';
+    btn.style.right = 'auto';
+    btn.style.bottom = 'auto';
+    btn.style.fontSize = '1.5rem';
+    btn.style.padding = '22px 56px';
+
+    requestAnimationFrame(function() {
+      requestAnimationFrame(function() {
+        var endTop = window.innerHeight - targetBottom - 52;
+        var endLeft = window.innerWidth - targetRight - 180;
+        btn.style.top = endTop + 'px';
+        btn.style.left = endLeft + 'px';
+        btn.style.fontSize = '1rem';
+        btn.style.padding = '14px 32px';
+
+        setTimeout(function() {
+          btn.classList.remove('animating');
+          btn.classList.add('sticky');
+          btn.style.top = '';
+          btn.style.left = '';
+          btn.style.right = '';
+          btn.style.bottom = '';
+          btn.style.fontSize = '';
+          btn.style.padding = '';
+          isSticky = true;
+          animating = false;
+        }, 520);
+      });
+    });
+  }
+
+  function animateToOriginal() {
+    var phRect = placeholder.getBoundingClientRect();
+    var btnRect = btn.getBoundingClientRect();
+
+    btn.classList.remove('sticky');
+    btn.classList.add('animating');
+    btn.style.top = btnRect.top + 'px';
+    btn.style.left = btnRect.left + 'px';
+    btn.style.right = 'auto';
+    btn.style.bottom = 'auto';
+    btn.style.fontSize = '1rem';
+    btn.style.padding = '14px 32px';
+
+    requestAnimationFrame(function() {
+      requestAnimationFrame(function() {
+        btn.style.top = phRect.top + 'px';
+        btn.style.left = phRect.left + 'px';
+        btn.style.fontSize = '1.5rem';
+        btn.style.padding = '22px 56px';
+
+        setTimeout(function() {
+          btn.classList.remove('animating');
+          btn.style.top = '';
+          btn.style.left = '';
+          btn.style.right = '';
+          btn.style.bottom = '';
+          btn.style.fontSize = '';
+          btn.style.padding = '';
+          parent.insertBefore(btn, placeholder);
+          placeholder.style.display = 'none';
+          isSticky = false;
+          animating = false;
+        }, 520);
+      });
+    });
+  }
 
   function check() {
-    var rect = originalParent.getBoundingClientRect();
+    if (animating) return;
+    var rect = parent.getBoundingClientRect();
     var gone = rect.bottom < -20;
     if (gone && !isSticky) {
-      isSticky = true;
-      placeholder.style.display = 'inline-block';
-      placeholder.style.width = btn.offsetWidth + 'px';
-      placeholder.style.height = btn.offsetHeight + 'px';
-      originalParent.insertBefore(placeholder, btn);
-      document.body.appendChild(btn);
-      btn.classList.add('sticky');
+      animating = true;
+      animateToCorner();
     } else if (!gone && isSticky) {
-      isSticky = false;
-      btn.classList.remove('sticky');
-      originalParent.insertBefore(btn, placeholder);
-      placeholder.style.display = 'none';
+      animating = true;
+      animateToOriginal();
     }
   }
 
