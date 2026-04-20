@@ -223,6 +223,36 @@ document.querySelectorAll('.collapsible-heading').forEach(function(heading) {
   });
 });
 
+// Sticky register button
+(function() {
+  var btn = document.getElementById('register-btn');
+  if (!btn) return;
+  var parent = btn.parentElement;
+  var placeholder = document.createElement('div');
+  placeholder.style.display = 'none';
+  var isSticky = false;
+
+  function check() {
+    var rect = parent.getBoundingClientRect();
+    var gone = rect.bottom < 0;
+    if (gone && !isSticky) {
+      isSticky = true;
+      placeholder.style.display = 'inline-block';
+      placeholder.style.width = btn.offsetWidth + 'px';
+      placeholder.style.height = btn.offsetHeight + 'px';
+      parent.insertBefore(placeholder, btn);
+      btn.classList.add('sticky');
+    } else if (!gone && isSticky) {
+      isSticky = false;
+      btn.classList.remove('sticky');
+      placeholder.style.display = 'none';
+    }
+  }
+
+  window.addEventListener('scroll', check, {passive: true});
+  check();
+})();
+
 // Confetti burst on load
 (function() {
   var container = document.getElementById('confetti');
