@@ -230,74 +230,120 @@ document.querySelectorAll('.collapsible-heading').forEach(function(heading) {
   var parent = btn.parentElement;
   var placeholder = document.createElement('div');
   placeholder.style.display = 'none';
-  var isSticky = false;
-  var animating = false;
 
-  var targetBottom = 28;
-  var targetRight = 28;
+  var progress = 0; // 0 = inline, 1 = corner
+  var direction = 0; // 1 = going to corner, -1 = going back, 0 = idle
+  var speed = 1 / (2 * 60); // 2 seconds at 60fps
+  var isDetached = false;
+  var rafId = null;
 
-  function clearStyles() {
-    btn.style.top = '';
-    btn.style.left = '';
-    btn.style.right = '';
-    btn.style.bottom = '';
-    btn.style.fontSize = '';
-    btn.style.padding = '';
+  var cornerBottom = 28;
+  var cornerRight = 28;
+
+  function lerp(a, b, t) {
+    return a + (b - a) * t;
   }
 
-  function animateToCorner() {
+  function easeInOutCubic(t) {
+    return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+  }
+
+  function detach() {
+    if (isDetached) return;
     var rect = btn.getBoundingClientRect();
     placeholder.style.display = 'inline-block';
     placeholder.style.width = rect.width + 'px';
     placeholder.style.height = rect.height + 'px';
     parent.insertBefore(placeholder, btn);
     document.body.appendChild(btn);
-
-    btn.classList.add('animating');
-    btn.style.top = rect.top + 'px';
-    btn.style.left = rect.left + 'px';
-    btn.style.fontSize = '1.5rem';
-    btn.style.padding = '22px 56px';
-
-    requestAnimationFrame(function() {
-      requestAnimationFrame(function() {
-        var endTop = window.innerHeight - targetBottom - 52;
-        var endLeft = window.innerWidth - targetRight - 180;
-        btn.style.top = endTop + 'px';
-        btn.style.left = endLeft + 'px';
-        btn.style.fontSize = '1rem';
-        btn.style.padding = '14px 32px';
-
-        setTimeout(function() {
-          btn.classList.remove('animating');
-          btn.classList.add('sticky');
-          clearStyles();
-          isSticky = true;
-          animating = false;
-        }, 1050);
-      });
-    });
+    isDetached = true;
   }
 
-  function animateToOriginal() {
-    btn.classList.remove('sticky');
-    clearStyles();
+  function reattach() {
+    if (!isDetached) return;
+    btn.classList.remove('flying', 'sticky');
+    btn.style.top = '';
+    btn.style.left = '';
+    btn.style.fontSize = '';
+    btn.style.padding = '';
     parent.insertBefore(btn, placeholder);
     placeholder.style.display = 'none';
-    isSticky = false;
-    animating = false;
+    isDetached = false;
+  }
+
+  function applyPosition(t) {
+    var e = easeInOutCubic(t);
+    var phRect = placeholder.getBoundingClientRect();
+    var startX = phRect.left + phRect.width / 2;
+    var startY = phRect.top + phRect.height / 2;
+    var endX = window.innerWidth - cornerRight - 90;
+    var endY = window.innerHeight - cornerBottom - 26;
+
+    var x = lerp(startX, endX, e);
+    var y = lerp(startY, endY, e);
+    var fontSize = lerp(1.5, 1, e);
+    var padV = lerp(22, 14, e);
+    var padH = lerp(56, 32, e);
+
+    btn.style.fontSize = fontSize + 'rem';
+    btn.style.padding = padV + 'px ' + padH + 'px';
+
+    var btnW = btn.offsetWidth;
+    var btnH = btn.offsetHeight;
+    btn.style.left = (x - btnW / 2) + 'px';
+    btn.style.top = (y - btnH / 2) + 'px';
+  }
+
+  function animate() {
+    progress += direction * speed;
+
+    if (progress >= 1) {
+      progress = 1;
+      direction = 0;
+      btn.classList.remove('flying');
+      btn.classList.add('sticky');
+      btn.style.top = '';
+      btn.style.left = '';
+      btn.style.fontSize = '';
+      btn.style.padding = '';
+      rafId = null;
+      return;
+    }
+
+    if (progress <= 0) {
+      progress = 0;
+      direction = 0;
+      reattach();
+      rafId = null;
+      return;
+    }
+
+    btn.classList.add('flying');
+    btn.classList.remove('sticky');
+    applyPosition(progress);
+    rafId = requestAnimationFrame(animate);
+  }
+
+  function startAnimation(dir) {
+    direction = dir;
+    if (dir === 1) detach();
+    if (!rafId) rafId = requestAnimationFrame(animate);
   }
 
   function check() {
-    if (animating) return;
     var rect = parent.getBoundingClientRect();
     var gone = rect.bottom < -20;
-    if (gone && !isSticky) {
-      animating = true;
-      animateToCorner();
-    } else if (!gone && isSticky) {
-      animating = true;
-      animateToOriginal();
+    if (gone && direction !== 1 && progress < 1) {
+      startAnimation(1);
+    } else if (!gone && direction !== -1 && progress > 0) {
+      if (progress === 1) {
+        btn.classList.remove('sticky');
+        btn.classList.add('flying');
+        btn.style.fontSize = '1rem';
+        btn.style.padding = '14px 32px';
+        applyPosition(progress);
+      }
+      startAnimation(-1);
     }
   }
 
