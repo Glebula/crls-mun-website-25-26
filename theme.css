@@ -339,11 +339,11 @@ body{
 .btn-register-big.sticky{
   position:fixed !important;bottom:28px;right:28px;z-index:50;
   font-size:1rem;padding:14px 32px;
-  animation:register-glow 2.5s ease-in-out infinite, slide-in-corner .4s ease forwards;
+  animation:register-glow 2.5s ease-in-out infinite;
 }
-@keyframes slide-in-corner{
-  0%{opacity:0;transform:translateY(30px) scale(.8)}
-  100%{opacity:1;transform:translateY(0) scale(1)}
+.btn-register-big.animating{
+  position:fixed !important;z-index:50;
+  transition:top .5s ease, left .5s ease, right .5s ease, bottom .5s ease, font-size .5s ease, padding .5s ease, transform .5s ease;
 }
 
 /* ===== Confetti ===== */
