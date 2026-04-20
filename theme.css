@@ -293,22 +293,83 @@ body{
 }
 .collapsible-content.collapsed{max-height:0;opacity:0;margin:0;padding:0}
 
-/* ===== Key Info Strip ===== */
-.key-info-strip{
+/* ===== Scrolling Ticker Strip ===== */
+.ticker-strip{
   background:linear-gradient(135deg,#1d4ed8,#4f46e5);
-  color:#fff;padding:14px 0;
+  color:#fff;padding:10px 0;overflow:hidden;white-space:nowrap;
 }
-.key-info-inner{
-  display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:center;
+.ticker-track{
+  display:inline-block;
+  animation:ticker 40s linear infinite;
 }
-.key-info-item{display:flex;align-items:center;gap:10px}
-.key-info-icon{font-size:1.4rem;line-height:1}
-.key-info-label{display:block;font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;opacity:.75}
-.key-info-value{display:block;font-size:.9rem;font-weight:600}
-.key-info-value a{color:#bfdbfe;text-decoration:none}
-.key-info-value a:hover{color:#fff}
-@media(max-width:720px){
-  .key-info-inner{flex-direction:column;align-items:flex-start;gap:10px}
+.ticker-item{font-size:.9rem;font-weight:600;padding:0 8px}
+.ticker-sep{color:#93c5fd;padding:0 12px;font-size:.7rem}
+@keyframes ticker{
+  0%{transform:translateX(0)}
+  100%{transform:translateX(-50%)}
+}
+.ticker-strip:hover .ticker-track{animation-play-state:paused}
+
+/* ===== Floating Register Button ===== */
+.floating-register{
+  position:fixed;bottom:24px;right:24px;z-index:50;
+  background:linear-gradient(135deg,#2563eb,#7c3aed);
+  color:#fff !important;font-weight:800;font-size:1.05rem;
+  padding:16px 32px;border-radius:99px;
+  box-shadow:0 8px 32px rgba(37,99,235,.35);
+  text-decoration:none !important;
+  transition:transform .2s ease, box-shadow .2s ease;
+  animation:float-pulse 2.5s ease-in-out infinite;
+}
+.floating-register:hover{
+  transform:translateY(-3px) scale(1.05);
+  box-shadow:0 14px 44px rgba(37,99,235,.45);
+}
+@keyframes float-pulse{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-6px)}
+}
+
+/* ===== Confetti ===== */
+.confetti-container{
+  position:fixed;top:0;left:0;width:100%;height:100%;
+  pointer-events:none;z-index:40;overflow:hidden;
+}
+.confetti-piece{
+  position:absolute;top:-20px;
+  width:10px;height:10px;
+  opacity:.85;
+  animation:confetti-fall linear forwards;
+}
+@keyframes confetti-fall{
+  0%{transform:translateY(0) rotate(0deg);opacity:.9}
+  100%{transform:translateY(110vh) rotate(720deg);opacity:0}
+}
+
+/* ===== Animated gradient on hero h1 ===== */
+.hero-content h1,.hero-banner h1{
+  background:linear-gradient(270deg,#fff,#93c5fd,#c4b5fd,#fff);
+  background-size:400% 100%;
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  animation:shimmer-text 6s ease infinite;
+}
+@keyframes shimmer-text{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+
+/* ===== Animated fact counters ===== */
+.fact-glass{
+  transition:transform .2s ease, box-shadow .2s ease;
+}
+.fact-glass:hover{
+  transform:translateY(-6px) scale(1.04);
+  box-shadow:0 20px 40px rgba(37,99,235,.18);
+}
+.fact-glass .fact-num{
+  background:linear-gradient(135deg,#2563eb,#7c3aed);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
 }
 
 /* ===== Gradient headings ===== */

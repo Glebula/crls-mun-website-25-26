@@ -223,6 +223,40 @@ document.querySelectorAll('.collapsible-heading').forEach(function(heading) {
   });
 });
 
+// Confetti burst on load
+(function() {
+  var container = document.getElementById('confetti');
+  if (!container) return;
+  var colors = ['#2563eb','#7c3aed','#f59e0b','#10b981','#ef4444','#ec4899','#06b6d4'];
+  var shapes = ['circle','square','triangle'];
+  function burst(count) {
+    for (var i = 0; i < count; i++) {
+      var el = document.createElement('div');
+      el.className = 'confetti-piece';
+      var color = colors[Math.floor(Math.random() * colors.length)];
+      var shape = shapes[Math.floor(Math.random() * shapes.length)];
+      var size = 6 + Math.random() * 10;
+      el.style.left = Math.random() * 100 + '%';
+      el.style.width = size + 'px';
+      el.style.height = size + 'px';
+      el.style.background = color;
+      el.style.animationDuration = (2.5 + Math.random() * 3) + 's';
+      el.style.animationDelay = (Math.random() * 2) + 's';
+      if (shape === 'circle') el.style.borderRadius = '50%';
+      else if (shape === 'triangle') {
+        el.style.background = 'transparent';
+        el.style.width = '0'; el.style.height = '0';
+        el.style.borderLeft = (size/2) + 'px solid transparent';
+        el.style.borderRight = (size/2) + 'px solid transparent';
+        el.style.borderBottom = size + 'px solid ' + color;
+      }
+      container.appendChild(el);
+    }
+    setTimeout(function() { container.innerHTML = ''; }, 6000);
+  }
+  burst(50);
+})();
+
 // Footer year
 const yearEl = document.getElementById('year');
 if (yearEl) yearEl.textContent = new Date().getFullYear();
