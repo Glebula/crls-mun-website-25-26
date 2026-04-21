@@ -700,3 +700,56 @@ body{
   .tab-btn{padding:8px 12px;font-size:.8rem}
   .tab-btn span{display:none}
 }
+
+/* ===== Easter Eggs ===== */
+.easter-toast{
+  position:fixed;bottom:24px;left:50%;z-index:999;
+  transform:translateX(-50%) translateY(80px);
+  background:#1e1b4b;color:#fff;
+  padding:14px 24px;border-radius:12px;
+  font-size:.9rem;text-align:center;white-space:nowrap;
+  box-shadow:0 8px 32px rgba(0,0,0,.3);
+  opacity:0;transition:transform .4s ease, opacity .4s ease;
+}
+.easter-toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+.easter-progress{font-size:.75rem;opacity:.7}
+
+.easter-modal{
+  position:fixed;inset:0;z-index:1000;
+  background:rgba(0,0,0,.7);backdrop-filter:blur(4px);
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;transition:opacity .4s ease;
+}
+.easter-modal.show{opacity:1}
+.easter-modal-inner{
+  background:#fff;border-radius:20px;padding:48px 40px;
+  text-align:center;max-width:480px;width:90%;
+  box-shadow:0 24px 64px rgba(0,0,0,.3);
+  transform:scale(.9);transition:transform .4s ease;
+}
+.easter-modal.show .easter-modal-inner{transform:scale(1)}
+.easter-modal-top{font-size:3rem;margin-bottom:16px}
+.easter-modal-inner h2{
+  font-size:1.8rem;font-weight:900;margin:0 0 12px;
+  background:linear-gradient(135deg,#2563eb,#7c3aed,#ec4899);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.easter-modal-inner p{color:#475569;margin:0 0 24px;line-height:1.6}
+
+@keyframes logo-spin{
+  0%{transform:rotate(0deg) scale(1)}
+  50%{transform:rotate(360deg) scale(1.2)}
+  100%{transform:rotate(720deg) scale(1)}
+}
+.logo-spin{animation:logo-spin 1s ease !important}
+
+.brand-secret{
+  background:linear-gradient(90deg,#2563eb,#7c3aed,#ec4899) !important;
+  -webkit-background-clip:text !important;-webkit-text-fill-color:transparent !important;
+  background-clip:text !important;
+}
+
+.easter-footer-hint{
+  text-align:center;padding:8px 0 4px;
+  font-size:.8rem;color:var(--muted);
+}
