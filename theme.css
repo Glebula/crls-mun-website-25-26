@@ -404,57 +404,97 @@ body{
   .policy-emoji{font-size:2rem}
 }
 
-/* ===== FAQ Accordion ===== */
-.faq-list{max-width:800px;margin:0 auto;display:flex;flex-direction:column;gap:28px}
-
-.faq-category{display:flex;flex-direction:column;gap:8px}
+/* ===== FAQ Flip Cards ===== */
+.faq-list{max-width:960px;margin:0 auto;display:flex;flex-direction:column;gap:36px}
+.faq-category{display:flex;flex-direction:column;gap:16px}
 
 .faq-cat-header{
-  display:flex;align-items:center;gap:10px;
-  padding:10px 16px;border-radius:10px;margin-bottom:4px;
+  display:flex;align-items:center;gap:12px;
+  padding:12px 18px;border-radius:12px;
 }
 .faq-cat-label{font-weight:800;font-size:.85rem;text-transform:uppercase;letter-spacing:.08em}
+.faq-cat-count{margin-left:auto;font-size:.75rem;font-weight:600;opacity:.7}
 
 .faq-cat-before{background:#eff6ff;border-left:4px solid #2563eb}
 .faq-cat-before .faq-cat-label{color:#1d4ed8}
+.faq-cat-before .faq-cat-count{color:#1d4ed8}
 .faq-cat-day{background:#f5f3ff;border-left:4px solid #7c3aed}
 .faq-cat-day .faq-cat-label{color:#6d28d9}
+.faq-cat-day .faq-cat-count{color:#6d28d9}
 .faq-cat-logistics{background:#f0fdf4;border-left:4px solid #10b981}
 .faq-cat-logistics .faq-cat-label{color:#065f46}
+.faq-cat-logistics .faq-cat-count{color:#065f46}
 
-.faq-item{
-  background:var(--surface);border:1px solid var(--border);
-  border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);
-  transition:border-color .2s ease, box-shadow .2s ease;
+.faq-grid{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:14px;
 }
-.faq-cat-before-item[open]{border-color:#bfdbfe;box-shadow:0 8px 24px rgba(37,99,235,.1)}
-.faq-cat-day-item[open]{border-color:#ddd6fe;box-shadow:0 8px 24px rgba(124,58,237,.1)}
-.faq-cat-logistics-item[open]{border-color:#a7f3d0;box-shadow:0 8px 24px rgba(16,185,129,.1)}
 
-.faq-question{
-  cursor:pointer;padding:16px 20px;font-weight:700;font-size:1rem;
-  list-style:none;display:flex;align-items:center;gap:12px;
-  transition:background .15s ease;
+.faq-flip-card{
+  perspective:1000px;cursor:pointer;
+  height:180px;
 }
-.faq-question::-webkit-details-marker{display:none}
-.faq-question::after{
-  content:"＋";margin-left:auto;font-size:1.2rem;font-weight:400;
-  color:var(--accent);transition:transform .25s ease;
+.faq-flip-inner{
+  position:relative;width:100%;height:100%;
+  transform-style:preserve-3d;
+  transition:transform .55s cubic-bezier(.4,0,.2,1);
 }
-.faq-item[open] .faq-question::after{content:"－";transform:rotate(180deg)}
-.faq-cat-before-item .faq-question:hover{background:#f0f7ff}
-.faq-cat-day-item .faq-question:hover{background:#f8f5ff}
-.faq-cat-logistics-item .faq-question:hover{background:#f0fdf7}
+.faq-flip-card.flipped .faq-flip-inner{transform:rotateY(180deg)}
 
-.faq-answer{
-  padding:0 20px 16px;color:var(--muted);font-size:.9rem;line-height:1.7;
-  animation:faq-open .3s ease;
+.faq-flip-front,.faq-flip-back{
+  position:absolute;inset:0;
+  border-radius:var(--radius);padding:20px;
+  backface-visibility:hidden;-webkit-backface-visibility:hidden;
+  display:flex;flex-direction:column;justify-content:space-between;
+  box-shadow:var(--shadow);
 }
-.faq-answer ul{padding-left:20px;margin:8px 0}
-.faq-answer li{margin:4px 0}
-@keyframes faq-open{
-  0%{opacity:0;transform:translateY(-8px)}
-  100%{opacity:1;transform:translateY(0)}
+
+.faq-flip-front{border:1px solid var(--border)}
+.faq-front-before{background:linear-gradient(135deg,#eff6ff 0%,#dbeafe 100%)}
+.faq-front-day{background:linear-gradient(135deg,#f5f3ff 0%,#ede9fe 100%)}
+.faq-front-logistics{background:linear-gradient(135deg,#f0fdf4 0%,#d1fae5 100%)}
+
+.faq-flip-num{
+  font-size:2rem;font-weight:900;line-height:1;opacity:.18;
+  font-variant-numeric:tabular-nums;
+}
+.faq-front-before .faq-flip-num{color:#1d4ed8}
+.faq-front-day .faq-flip-num{color:#6d28d9}
+.faq-front-logistics .faq-flip-num{color:#065f46}
+
+.faq-flip-q{
+  flex:1;margin:6px 0 0;font-weight:700;font-size:.95rem;line-height:1.4;
+  color:var(--text);
+}
+.faq-flip-hint{
+  font-size:.72rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;
+  opacity:.55;margin-top:auto;
+}
+.faq-front-before .faq-flip-hint{color:#1d4ed8}
+.faq-front-day .faq-flip-hint{color:#6d28d9}
+.faq-front-logistics .faq-flip-hint{color:#065f46}
+
+.faq-flip-back{
+  transform:rotateY(180deg);
+  background:#fff;border:1px solid var(--border);
+  overflow-y:auto;font-size:.875rem;color:var(--muted);line-height:1.65;
+  justify-content:flex-start;gap:6px;
+}
+.faq-flip-back p{margin:0}
+.faq-flip-back ul{margin:4px 0;padding-left:18px}
+.faq-flip-back li{margin:3px 0}
+.faq-flip-back a{color:var(--accent-2)}
+.faq-back-note{font-size:.8rem;opacity:.75;margin-top:6px !important}
+
+.faq-flip-card:hover:not(.flipped) .faq-flip-inner{transform:rotateY(8deg) translateY(-2px)}
+
+@media(max-width:700px){
+  .faq-flip-card{height:160px}
+  .faq-flip-front,.faq-flip-back{padding:14px}
+  .faq-flip-q{font-size:.85rem}
+}
+@media(max-width:500px){
+  .faq-grid{grid-template-columns:1fr}
+  .faq-flip-card{height:auto;min-height:130px}
 }
 
 /* ===== Info Cards (Register page) ===== */
