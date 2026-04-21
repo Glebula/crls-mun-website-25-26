@@ -438,6 +438,137 @@ document.querySelectorAll('.faq-flip-card').forEach(function(card) {
   }
 })();
 
+// ===== Easter Eggs =====
+(function() {
+  var EGGS = ['mun', 'logo', 'hover'];
+  var found = JSON.parse(sessionStorage.getItem('easterEggs') || '[]');
+
+  function isFound(id) { return found.indexOf(id) !== -1; }
+
+  function discover(id, label) {
+    if (isFound(id)) return;
+    found.push(id);
+    sessionStorage.setItem('easterEggs', JSON.stringify(found));
+    showToast(label, found.length);
+    if (found.length === EGGS.length) setTimeout(showSurprise, 1800);
+  }
+
+  function showToast(label, count) {
+    var t = document.createElement('div');
+    t.className = 'easter-toast';
+    t.innerHTML = '🥚 Easter egg found! <strong>' + label + '</strong><br><span class="easter-progress">' + count + ' / 3 discovered</span>';
+    document.body.appendChild(t);
+    requestAnimationFrame(function() { t.classList.add('show'); });
+    setTimeout(function() {
+      t.classList.remove('show');
+      setTimeout(function() { t.remove(); }, 400);
+    }, 3500);
+  }
+
+  function burstConfetti(container) {
+    var colors = ['#2563eb','#7c3aed','#f59e0b','#10b981','#ef4444','#ec4899','#06b6d4'];
+    for (var i = 0; i < 70; i++) {
+      var el = document.createElement('div');
+      el.className = 'confetti-piece';
+      var size = 6 + Math.random() * 10;
+      var color = colors[Math.floor(Math.random() * colors.length)];
+      el.style.left = Math.random() * 100 + '%';
+      el.style.width = size + 'px';
+      el.style.height = size + 'px';
+      el.style.background = color;
+      el.style.animationDuration = (2.5 + Math.random() * 3) + 's';
+      el.style.animationDelay = (Math.random() * 1.5) + 's';
+      if (Math.random() > 0.5) el.style.borderRadius = '50%';
+      container.appendChild(el);
+    }
+  }
+
+  function showSurprise() {
+    var c = document.createElement('div');
+    c.className = 'confetti-container';
+    document.body.appendChild(c);
+    burstConfetti(c);
+    setTimeout(function() { c.remove(); }, 7000);
+
+    var modal = document.createElement('div');
+    modal.className = 'easter-modal';
+    modal.innerHTML = '<div class="easter-modal-inner">'
+      + '<div class="easter-modal-top">🎉 🥚 🎊</div>'
+      + '<h2>You found all 3!</h2>'
+      + '<p>You\'ve uncovered every Easter egg on the BridgeMUN site.<br>See you at the conference on <strong>May 3rd</strong> — you\'re already a legend.</p>'
+      + '<button class="btn easter-close-btn">Close</button>'
+      + '</div>';
+    document.body.appendChild(modal);
+    requestAnimationFrame(function() { modal.classList.add('show'); });
+    modal.querySelector('.easter-close-btn').addEventListener('click', function() {
+      modal.classList.remove('show');
+      setTimeout(function() { modal.remove(); }, 400);
+    });
+  }
+
+  // Egg 1: Type "mun"
+  var typed = '';
+  document.addEventListener('keydown', function(e) {
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    typed += e.key.toLowerCase();
+    if (typed.length > 3) typed = typed.slice(-3);
+    if (typed === 'mun') {
+      typed = '';
+      var existing = document.getElementById('confetti');
+      var c = existing || document.createElement('div');
+      var created = !existing;
+      if (created) { c.className = 'confetti-container'; document.body.appendChild(c); }
+      burstConfetti(c);
+      if (created) setTimeout(function() { c.remove(); }, 6000);
+      else setTimeout(function() { c.innerHTML = ''; }, 6000);
+      discover('mun', 'The Secret Word');
+    }
+  });
+
+  // Egg 2: Click any logo 5 times within 30 seconds
+  var logoClicks = [];
+  document.querySelectorAll('.logo-img').forEach(function(img) {
+    img.addEventListener('click', function(e) {
+      if (isFound('logo')) return;
+      e.preventDefault();
+      e.stopPropagation();
+      var now = Date.now();
+      logoClicks.push(now);
+      logoClicks = logoClicks.filter(function(t) { return now - t < 30000; });
+      if (logoClicks.length >= 5) {
+        logoClicks = [];
+        img.classList.add('logo-spin');
+        setTimeout(function() { img.classList.remove('logo-spin'); }, 1000);
+        discover('logo', 'The Persistent Clicker');
+      }
+    });
+  });
+
+  // Egg 3: Hover brand title for 5 seconds
+  var brandTitle = document.querySelector('.brand-title');
+  if (brandTitle) {
+    var hoverTimer;
+    brandTitle.addEventListener('mouseenter', function() {
+      if (isFound('hover')) return;
+      hoverTimer = setTimeout(function() {
+        brandTitle.classList.add('brand-secret');
+        setTimeout(function() { brandTitle.classList.remove('brand-secret'); }, 2000);
+        discover('hover', 'The Patient Hoverer');
+      }, 5000);
+    });
+    brandTitle.addEventListener('mouseleave', function() { clearTimeout(hoverTimer); });
+  }
+
+  // Footer hint (injected on every page)
+  var legal = document.querySelector('.legal');
+  if (legal) {
+    var hint = document.createElement('div');
+    hint.className = 'easter-footer-hint';
+    hint.textContent = '🔍 3 Easter eggs are hidden across this site — can you find them all?';
+    legal.parentNode.insertBefore(hint, legal);
+  }
+})();
+
 // Footer year
 const yearEl = document.getElementById('year');
 if (yearEl) yearEl.textContent = new Date().getFullYear();
