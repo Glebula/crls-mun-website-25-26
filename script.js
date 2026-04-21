@@ -450,11 +450,11 @@ document.querySelectorAll('.faq-flip-card').forEach(function(card) {
     if (!isFound(id)) {
       found.push(id);
       sessionStorage.setItem('easterEggs', JSON.stringify(found));
-      showToast(label, found.length);
-      if (found.length === TOTAL && !surpriseShown) {
-        surpriseShown = true;
-        setTimeout(showSurprise, 1800);
-      }
+    }
+    showToast(label, found.length);
+    if (found.length === TOTAL && !surpriseShown) {
+      surpriseShown = true;
+      setTimeout(showSurprise, 1800);
     }
   }
 
@@ -563,7 +563,7 @@ document.querySelectorAll('.faq-flip-card').forEach(function(card) {
   }
 
   // Egg 4: Konami code (up up down down left right left right b a)
-  var konamiSeq = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
+  var konamiSeq = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight'];
   var konamiPos = 0;
   function checkKonami(e) {
     var expected = konamiSeq[konamiPos];
