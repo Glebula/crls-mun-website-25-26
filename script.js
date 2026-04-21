@@ -392,6 +392,29 @@ document.querySelectorAll('.faq-flip-card').forEach(function(card) {
   });
 });
 
+// FAQ category tabs
+(function() {
+  var faqBtns = document.querySelectorAll('[data-faq-tab]');
+  if (!faqBtns.length) return;
+  var cats = document.querySelectorAll('[data-faq-cat]');
+
+  faqBtns.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      faqBtns.forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      var filter = btn.getAttribute('data-faq-tab');
+
+      cats.forEach(function(cat) {
+        if (filter === 'all' || cat.getAttribute('data-faq-cat') === filter) {
+          cat.style.display = '';
+        } else {
+          cat.style.display = 'none';
+        }
+      });
+    });
+  });
+})();
+
 // Policy tabs
 (function() {
   var tabBtns = document.querySelectorAll('.tab-btn[data-tab]');
