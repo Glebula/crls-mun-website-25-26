@@ -764,3 +764,10 @@ body{
   text-align:center;padding:8px 0 4px;
   font-size:.8rem;color:var(--muted);
 }
+
+/* ===== Full-width Photo ===== */
+.full-photo{
+  width:100%;max-width:900px;margin:16px auto 0;
+  border-radius:var(--radius);border:1px solid var(--border);
+  box-shadow:var(--shadow);display:block;
+}
