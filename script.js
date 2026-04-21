@@ -440,23 +440,28 @@ document.querySelectorAll('.faq-flip-card').forEach(function(card) {
 
 // ===== Easter Eggs =====
 (function() {
-  var EGGS = ['mun', 'logo', 'hover'];
+  var TOTAL = 5;
   var found = JSON.parse(sessionStorage.getItem('easterEggs') || '[]');
+  var surpriseShown = false;
 
   function isFound(id) { return found.indexOf(id) !== -1; }
 
   function discover(id, label) {
-    if (isFound(id)) return;
-    found.push(id);
-    sessionStorage.setItem('easterEggs', JSON.stringify(found));
-    showToast(label, found.length);
-    if (found.length === EGGS.length) setTimeout(showSurprise, 1800);
+    if (!isFound(id)) {
+      found.push(id);
+      sessionStorage.setItem('easterEggs', JSON.stringify(found));
+      showToast(label, found.length);
+      if (found.length === TOTAL && !surpriseShown) {
+        surpriseShown = true;
+        setTimeout(showSurprise, 1800);
+      }
+    }
   }
 
   function showToast(label, count) {
     var t = document.createElement('div');
     t.className = 'easter-toast';
-    t.innerHTML = '🥚 Easter egg found! <strong>' + label + '</strong><br><span class="easter-progress">' + count + ' / 3 discovered</span>';
+    t.innerHTML = '🥚 Easter egg found! <strong>' + label + '</strong><br><span class="easter-progress">' + count + ' / ' + TOTAL + ' discovered</span>';
     document.body.appendChild(t);
     requestAnimationFrame(function() { t.classList.add('show'); });
     setTimeout(function() {
@@ -471,11 +476,10 @@ document.querySelectorAll('.faq-flip-card').forEach(function(card) {
       var el = document.createElement('div');
       el.className = 'confetti-piece';
       var size = 6 + Math.random() * 10;
-      var color = colors[Math.floor(Math.random() * colors.length)];
       el.style.left = Math.random() * 100 + '%';
       el.style.width = size + 'px';
       el.style.height = size + 'px';
-      el.style.background = color;
+      el.style.background = colors[Math.floor(Math.random() * colors.length)];
       el.style.animationDuration = (2.5 + Math.random() * 3) + 's';
       el.style.animationDelay = (Math.random() * 1.5) + 's';
       if (Math.random() > 0.5) el.style.borderRadius = '50%';
@@ -483,18 +487,21 @@ document.querySelectorAll('.faq-flip-card').forEach(function(card) {
     }
   }
 
-  function showSurprise() {
+  function tempConfetti() {
     var c = document.createElement('div');
     c.className = 'confetti-container';
     document.body.appendChild(c);
     burstConfetti(c);
-    setTimeout(function() { c.remove(); }, 7000);
+    setTimeout(function() { c.remove(); }, 6000);
+  }
 
+  function showSurprise() {
+    tempConfetti();
     var modal = document.createElement('div');
     modal.className = 'easter-modal';
     modal.innerHTML = '<div class="easter-modal-inner">'
       + '<div class="easter-modal-top">🎉 🥚 🎊</div>'
-      + '<h2>You found all 3!</h2>'
+      + '<h2>You found all 5!</h2>'
       + '<p>You\'ve uncovered every Easter egg on the BridgeMUN site.<br>See you at the conference on <strong>May 3rd</strong> — you\'re already a legend.</p>'
       + '<button class="btn easter-close-btn">Close</button>'
       + '</div>';
@@ -510,26 +517,21 @@ document.querySelectorAll('.faq-flip-card').forEach(function(card) {
   var typed = '';
   document.addEventListener('keydown', function(e) {
     if (e.metaKey || e.ctrlKey || e.altKey) return;
-    typed += e.key.toLowerCase();
-    if (typed.length > 3) typed = typed.slice(-3);
-    if (typed === 'mun') {
+    var key = e.key.toLowerCase();
+    typed += key;
+    if (typed.length > 10) typed = typed.slice(-10);
+    if (typed.slice(-3) === 'mun') {
       typed = '';
-      var existing = document.getElementById('confetti');
-      var c = existing || document.createElement('div');
-      var created = !existing;
-      if (created) { c.className = 'confetti-container'; document.body.appendChild(c); }
-      burstConfetti(c);
-      if (created) setTimeout(function() { c.remove(); }, 6000);
-      else setTimeout(function() { c.innerHTML = ''; }, 6000);
+      tempConfetti();
       discover('mun', 'The Secret Word');
     }
+    checkKonami(e);
   });
 
   // Egg 2: Click any logo 5 times within 30 seconds
   var logoClicks = [];
   document.querySelectorAll('.logo-img').forEach(function(img) {
     img.addEventListener('click', function(e) {
-      if (isFound('logo')) return;
       e.preventDefault();
       e.stopPropagation();
       var now = Date.now();
@@ -537,8 +539,10 @@ document.querySelectorAll('.faq-flip-card').forEach(function(card) {
       logoClicks = logoClicks.filter(function(t) { return now - t < 30000; });
       if (logoClicks.length >= 5) {
         logoClicks = [];
-        img.classList.add('logo-spin');
-        setTimeout(function() { img.classList.remove('logo-spin'); }, 1000);
+        document.querySelectorAll('.logo-img').forEach(function(i) {
+          i.classList.add('logo-spin');
+          setTimeout(function() { i.classList.remove('logo-spin'); }, 1000);
+        });
         discover('logo', 'The Persistent Clicker');
       }
     });
@@ -549,7 +553,6 @@ document.querySelectorAll('.faq-flip-card').forEach(function(card) {
   if (brandTitle) {
     var hoverTimer;
     brandTitle.addEventListener('mouseenter', function() {
-      if (isFound('hover')) return;
       hoverTimer = setTimeout(function() {
         brandTitle.classList.add('brand-secret');
         setTimeout(function() { brandTitle.classList.remove('brand-secret'); }, 2000);
@@ -559,12 +562,49 @@ document.querySelectorAll('.faq-flip-card').forEach(function(card) {
     brandTitle.addEventListener('mouseleave', function() { clearTimeout(hoverTimer); });
   }
 
+  // Egg 4: Konami code (up up down down left right left right b a)
+  var konamiSeq = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
+  var konamiPos = 0;
+  function checkKonami(e) {
+    var expected = konamiSeq[konamiPos];
+    if (e.key === expected || e.key.toLowerCase() === expected) {
+      konamiPos++;
+      if (konamiPos === konamiSeq.length) {
+        konamiPos = 0;
+        document.body.classList.add('barrel-roll');
+        setTimeout(function() { document.body.classList.remove('barrel-roll'); }, 1200);
+        discover('konami', 'The Konami Master');
+      }
+    } else {
+      konamiPos = 0;
+    }
+  }
+
+  // Egg 5: Triple-click the copyright year
+  var yearEl = document.getElementById('year');
+  if (yearEl) {
+    var yearClicks = [];
+    yearEl.style.cursor = 'default';
+    yearEl.addEventListener('click', function(e) {
+      e.stopPropagation();
+      var now = Date.now();
+      yearClicks.push(now);
+      yearClicks = yearClicks.filter(function(t) { return now - t < 1500; });
+      if (yearClicks.length >= 3) {
+        yearClicks = [];
+        document.body.classList.add('dark-flash');
+        setTimeout(function() { document.body.classList.remove('dark-flash'); }, 2500);
+        discover('year', 'The Time Traveler');
+      }
+    });
+  }
+
   // Footer hint (injected on every page)
   var legal = document.querySelector('.legal');
   if (legal) {
     var hint = document.createElement('div');
     hint.className = 'easter-footer-hint';
-    hint.textContent = '🔍 3 Easter eggs are hidden across this site — can you find them all?';
+    hint.textContent = '🔍 5 Easter eggs are hidden across this site — can you find them all?';
     legal.parentNode.insertBefore(hint, legal);
   }
 })();

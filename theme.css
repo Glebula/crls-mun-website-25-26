@@ -749,6 +749,17 @@ body{
   background-clip:text !important;
 }
 
+@keyframes barrel-roll{
+  0%{transform:rotate(0deg)}
+  100%{transform:rotate(360deg)}
+}
+.barrel-roll{animation:barrel-roll 1.2s ease-in-out !important;transform-origin:center center}
+
+.dark-flash{
+  filter:invert(1) hue-rotate(180deg);
+  transition:filter .3s ease;
+}
+
 .easter-footer-hint{
   text-align:center;padding:8px 0 4px;
   font-size:.8rem;color:var(--muted);
