@@ -424,7 +424,7 @@ body{
 }
 .faq-item[open] .faq-question::after{content:"－";transform:rotate(180deg)}
 .faq-question:hover{background:#f8faff}
-.faq-icon{font-size:1.3rem;flex-shrink:0}
+
 .faq-answer{
   padding:0 20px 16px;color:var(--muted);font-size:.9rem;line-height:1.7;
   animation:faq-open .3s ease;
