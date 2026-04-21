@@ -385,6 +385,13 @@ document.querySelectorAll('.collapsible-heading').forEach(function(heading) {
   burst(50);
 })();
 
+// FAQ flip cards
+document.querySelectorAll('.faq-flip-card').forEach(function(card) {
+  card.addEventListener('click', function() {
+    card.classList.toggle('flipped');
+  });
+});
+
 // Policy tabs
 (function() {
   var tabBtns = document.querySelectorAll('.tab-btn[data-tab]');
